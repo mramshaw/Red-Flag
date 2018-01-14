@@ -48,9 +48,13 @@ network failure.
 
 ## Requirements
 
-Requires __make__ and __Java 1.8__ to be installed (but could easily be backported to an earlier version of Java).
+Requires __make__ and __Java 1.8__ to be installed (but could be backported to
+an earlier version of Java).
 
-Also, __Java 1.9__ is an option, although there are probably better streaming solutions available (Akka? RxJava?).
+Also, __Java 1.9__ (with FLOW) has been released, but many projects (such as
+[Guava](https://github.com/google/guava) and [Scala](http://www.scala-lang.org/)
+still seem to rely on Java 1.8. And there there are probably better streaming
+solutions available ([Akka](https://akka.io/)? [RxJava](https://github.com/ReactiveX/RxJava)?).
 
 #### To build
 
