@@ -68,6 +68,13 @@ solutions available ([Akka](https://akka.io/)? [RxJava](https://github.com/React
 
     make clean
 
+## Privacy & Compliance
+
+For competitive reasons, most firms may well favour an on-premises solution to a
+cloud-based one. And this bears consideration for legislative reasons as well, as
+many countries have data residency requirements. Where data access needs to be
+audited, this may well prove to be another consideration to take into account.
+
 ## To Do
 
 This is largely a list of elements that are out of scope of the current exercise.
