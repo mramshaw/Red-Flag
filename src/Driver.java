@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Predicate;
@@ -21,6 +20,15 @@ public class Driver {
         System.out.println(words);
         System.out.println();
    
+        // Now convert the keywords to upper case & remove duplicates
+        System.out.println("Keywords to be scanned for (upper-case, duplicates removed):");
+        HashSet<String> keywords = new HashSet<String>(words.size());
+        for (String word : words) {
+             keywords.add(word.toUpperCase());
+        }
+        System.out.println(keywords);
+        System.out.println();
+
         Collection<Email> emails = EmailManager.getEmails("Emails");
         if (emails == null) {
             System.err.println("Could not parse any emails in the 'Emails' directory, aborting ...");
@@ -30,12 +38,6 @@ public class Driver {
         System.out.println();
         System.out.println("Emails to be scanned (duplicates removed): " + emails.size());
         System.out.println();
-
-        // Now convert the keywords to upper case
-        List<String> keywords = new ArrayList<String>(words.size());
-        for (String word : words) {
-             keywords.add(word.toUpperCase());
-        }
 
         List<Email> flagged;
 
