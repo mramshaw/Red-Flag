@@ -53,7 +53,7 @@ an earlier version of Java).
 
 Also, __Java 1.9__ (with FLOW) has been released, but many projects - such as
 [Guava](https://github.com/google/guava) and [Scala](http://www.scala-lang.org/) -
-still seem to rely on Java 1.8. And there there are probably better asynchronous
+still seem to rely on Java 1.8. And there are probably better asynchronous
 solutions available ([Akka](https://akka.io/)? [RxJava](https://github.com/ReactiveX/RxJava)?).
 
 #### To build
