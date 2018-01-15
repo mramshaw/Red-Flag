@@ -1,5 +1,7 @@
 # Red Flag
 
+![Keyword_Filtering](/images/filter_keywords.svg)
+
 A proof of concept of a red-flagging framework (not to be taken seriously).
 
 All outbound communications (emails only - for now) will be scanned for certain
@@ -32,7 +34,7 @@ Likewise, editorial review of offending communications will not be addressed.
 ## Keywords
 
 These will be configurable and relatively arbitrary, consisting of `Facebook`,
-`Glados` (sorry Portal fans), `Trump`, `Twitter` and various semantic forms of
+`GLaDOS` (sorry Portal fans), `Trump`, `Twitter` and various semantic forms of
 the word `tweet` (the water-cooler is the place for this type of discussion).
 
 ## Chaos Monkeys
