@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * This is a quick and dirty representation of an Email.
  *
@@ -59,6 +61,35 @@ public class Email {
         this.dateTime = sent;
     }
 
+    @Override
+    public boolean equals(Object other) {
+
+        if (other == this)             return true;
+        if (other == null)             return false;
+
+        if (other.getClass() != this.getClass())
+            return false;
+
+        Email otherEmail = (Email) other;
+
+        if (!otherEmail.getSubject()  .equals(subject   ))
+            return false;
+        if (!otherEmail.getAuthor()   .equals(author    ))
+            return false;
+        if (!otherEmail.getRecipient().equals(recipients))
+            return false;
+        if (!otherEmail.getDateTime() .equals(dateTime  ))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subject + author + recipients + dateTime);
+    }
+
+    @Override
     public String toString() {
         return "Subject: " + subject    + "\n" +
                "From:    " + author     + "\n" + 

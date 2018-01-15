@@ -4,23 +4,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-//import java.util.Arrays;
-import java.util.ArrayList;
-//import java.util.Collection;
-//import java.util.HashSet;
-import java.util.List;
-//import java.util.stream.Collectors;
+import java.util.Collection;
+import java.util.HashSet;
 
 public class EmailManager {
 
-    private static List<Email> emails;
+    private static Collection<Email> emails;
 
-    public static List<Email> getEmails(String dirName) {
+    public static Collection<Email> getEmails(String dirName) {
 
         if (emails != null)
             return emails;
 
-        emails = new ArrayList<Email>();
+        emails = new HashSet<Email>();
 
         File curDir = new File(dirName);
 
@@ -36,32 +32,15 @@ public class EmailManager {
                 String e = dirName + "/" + f.getName();
                 System.out.println("Parsing email '" + e + "'");
                 Email em = parseFile(e);
+            //  System.out.println("hashCode '" + em.hashCode() + "'");
                 if (em != null) {
                     emails.add(em);
                 }
             }
         }
         System.out.println();
-        System.out.println("All Emails parsed");
-        System.out.println();
+        System.out.println("All Emails parsed (" + fileList.length + ")");
 
-/*
-        List<Email> emails = Arrays.asList(email1, email2, email3, email4);
-        int total = emails.stream()
-                .collect(Collectors.summingInt(Email::getRecipientCount));
-        System.out.println("Recipients count = " + total);
-        
-        //create a list with duplicates
-        List<Email> dupEmails = Arrays.asList(email1, email2, email3, email4, email1, email2);
-        System.out.println("Before removing duplicates: ");
-        System.out.println("===========================");
-        System.out.println(dupEmails.toString());
-        
-        Collection<Email> noDups = new HashSet<>(dupEmails);
-        System.out.println("After removing duplicates: ");
-        System.out.println("===========================");
-        System.out.println(noDups.toString());
-*/
         return emails;
     }
 
@@ -126,13 +105,15 @@ public class EmailManager {
     public static void main(String[] args) {
 
         System.out.println();
-        List<Email> emails = getEmails("Emails");
+        Collection<Email> emails = getEmails("Emails");
         if (emails == null) {
             System.err.println("Could not parse any emails in the 'Emails' directory, aborting ...");
             System.exit(-1);
         }
 
-        System.out.println("Emails to be scanned (" + emails.size() + ")");
+        System.out.println();
+        System.out.println("Emails to be scanned, duplicates removed (" + emails.size() + ")");
+        System.out.println("=============================================");
         System.out.println(emails);
         System.out.println();
     }

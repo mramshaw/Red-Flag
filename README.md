@@ -84,6 +84,7 @@ As such, these are features that remain to be implemented.
 - [ ] Implement Email streaming
 - [ ] Implement Email body scanning
 - [ ] Implement Email attachment scanning
+- [ ] Investigate the performance impact of parallel streams
 - [ ] Other forms of communications scanning (possibly machine learning)
 - [ ] Statistical analysis of offending communications
 - [ ] Persistence (format to be determined but probably some type of document store)
