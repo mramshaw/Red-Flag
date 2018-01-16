@@ -9,7 +9,8 @@ keywords - which will trigger editorial review of the offending communications.
 
 [This could be extended into a compliance framework with a little effort.
 For instance, all outgoing communications could be archived (for compliance
-purposes). This archive should of course be searchable.]
+purposes). This archive should of course be searchable. And any offending
+communications should be quarantined - and of course NOT be archived.]
 
 ## Rationale
 
