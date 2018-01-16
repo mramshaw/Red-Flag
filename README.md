@@ -7,6 +7,10 @@ A proof of concept of a red-flagging framework (not to be taken seriously).
 All outbound communications (emails only - for now) will be scanned for certain
 keywords - which will trigger editorial review of the offending communications.
 
+[This could be extended into a compliance framework with a little effort.
+For instance, all outgoing commincations could be archived (for compliance
+purposes). This archive should of course be searchable.]
+
 ## Rationale
 
 Certain discussions are incompatible with a productive workplace.
