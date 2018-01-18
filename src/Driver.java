@@ -73,5 +73,18 @@ public class Driver {
                                    .map(Email::getAuthor)
                                    .collect(Collectors.toList());
         System.out.println("Red-Flagged Email Authors: " + list);
+
+        System.out.println();
+        System.out.println("Emails (before red-flagged emails removed):");
+        System.out.println(emails);
+        System.out.println();
+
+        System.out.println("Removing red-flagged emails ...");
+        emails.removeAll(flagged);
+        System.out.println();
+
+        System.out.println("Emails (after red-flagged emails removed):");
+        System.out.println(emails);
+        System.out.println();
     }
 }
