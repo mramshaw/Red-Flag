@@ -89,7 +89,7 @@ This is largely a list of elements that are out of scope of the current exercise
 As such, these are features that remain to be implemented.
 
 - [ ] Implement Email streaming
-- [ ] Implement Email body scanning
+- [x] Implement Email body scanning
 - [ ] Implement Email attachment scanning
 - [ ] Investigate the performance impact of parallel streams
 - [ ] Other forms of communications scanning (possibly machine learning)

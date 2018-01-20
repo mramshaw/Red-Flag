@@ -18,6 +18,9 @@ parallel:
 keywords:
 	java -cp src/ KeywordManager
 
+postscript:
+	java -cp src/ PostScriptManager
+
 emails:
 	java -cp src/ EmailManager
 

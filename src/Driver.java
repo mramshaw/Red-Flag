@@ -9,6 +9,14 @@ public class Driver {
 
     public static void main(String[] args) {
 
+        boolean parallel = (args.length > 1 && args[1] == "-parallel");
+
+        String ps = PostScriptManager.getPostScript("PostScript");
+        if (ps == null) {
+            System.err.println("Could not parse 'PostScript' file, aborting ...");
+            System.exit(-1);
+        }
+
         List<String> words = KeywordManager.getKeywords("Keywords");
         if (words == null) {
             System.err.println("Could not parse 'Keywords' file, aborting ...");
@@ -42,8 +50,15 @@ public class Driver {
         List<Email> flagged;
 
         Predicate<Email> matchKeywords = (email) -> {
-            // Only flagging email subject for now
             String text = email.getSubject().toUpperCase();
+            for (String keyword : keywords) {
+            //  System.out.println("text: " + text + " word: " + keyword);
+                if (text.contains(keyword)) {
+                //  System.out.println("Matched: " + keyword);
+                    return true;
+                }
+            }
+            text = email.getText().toUpperCase();
             for (String keyword : keywords) {
             //  System.out.println("text: " + text + " word: " + keyword);
                 if (text.contains(keyword)) {
@@ -54,7 +69,8 @@ public class Driver {
             return false;
         };
 
-        if (args.length > 1 && args[1] == "-parallel") {
+        if (parallel) {
+            System.out.println("Parallel");
             flagged = emails.parallelStream()
                             .filter(email -> matchKeywords.test(email))
                             .collect(Collectors.toList());
@@ -65,6 +81,7 @@ public class Driver {
         }
 
         System.out.println("Red-Flagged Email:");
+        System.out.println("==================");
         System.out.println(flagged);
         System.out.println();
 
@@ -72,8 +89,12 @@ public class Driver {
         List<String> list = flagged.stream()
                                    .map(Email::getAuthor)
                                    .collect(Collectors.toList());
-        System.out.println("Red-Flagged Email Authors: " + list);
+        System.out.println("Red-Flagged Email Authors:");
+        System.out.println("==========================");
+        System.out.println(list);
+        System.out.println();
 
+/*
         System.out.println();
         System.out.println("Emails (before red-flagged emails removed):");
         System.out.println(emails);
@@ -83,7 +104,18 @@ public class Driver {
         emails.removeAll(flagged);
         System.out.println();
 
+        if (parallel) {
+            System.out.println("Parallel");
+            emails.parallelStream()
+                  .forEach(email.appendText(ps));
+        } else {
+            emails.stream()
+                  .forEach(email.appendText(ps));
+        }
+*/
+
         System.out.println("Emails (after red-flagged emails removed):");
+        System.out.println("==========================================");
         System.out.println(emails);
         System.out.println();
     }

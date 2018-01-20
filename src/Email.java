@@ -11,12 +11,14 @@ public class Email {
     private String author;
     private String recipients;
     private String dateTime;
+    private String body;
   
-    public Email(String subject, String from, String to, String sent) {
+    public Email(String subject, String from, String to, String sent, String text) {
         this.subject    = subject;
         this.author     = from;
         this.recipients = to;
         this.dateTime   = sent;
+        this.body       = text;
     }
 
     public String getSubject() {
@@ -61,6 +63,18 @@ public class Email {
         this.dateTime = sent;
     }
 
+    public String getText() {
+        return body;
+    }
+
+    public void setText(String text) {
+        this.body = text;
+    }
+
+    public void appendText(String text) {
+        this.body = body + text;
+    }
+
     @Override
     public boolean equals(Object other) {
 
@@ -80,13 +94,15 @@ public class Email {
             return false;
         if (!otherEmail.getDateTime() .equals(dateTime  ))
             return false;
+        if (!otherEmail.getText()     .equals(body      ))
+            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(subject + author + recipients + dateTime);
+        return Objects.hash(subject + author + recipients + dateTime + body);
     }
 
     @Override
@@ -94,6 +110,7 @@ public class Email {
         return "Subject: " + subject    + "\n" +
                "From:    " + author     + "\n" + 
                "To:      " + recipients + "\n" +
-               "Sent:    " + dateTime;
+               "Sent:    " + dateTime   + "\n" +
+               body;
     }
 }

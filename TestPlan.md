@@ -15,12 +15,32 @@ Verify non-existent 'Keywords' file aborts correctly:
 	java -cp src/ Driver
 	Unable to open file 'Keywords'
 	Could not parse 'Keywords' file, aborting ...
-	Makefile:7: recipe for target 'run' failed
+	Makefile:13: recipe for target 'run' failed
 	make: *** [run] Error 255
 	$
 	```
 
 3) Rename `KeywordsAA` file back to `Keywords`.
+
+## PostScript
+
+Verify non-existent 'PostScript' file aborts correctly:
+
+1) Rename `PostScript` file to `PostScriptAA`.
+
+2) Run the application:
+
+	```
+	$ make run
+	java -cp src/ Driver
+	Unable to open file 'PostScript'
+	Could not parse 'PostScript' file, aborting ...
+	Makefile:13: recipe for target 'run' failed
+	make: *** [run] Error 255
+	$
+	```
+
+3) Rename `PostScriptAA` file back to `PostScript`.
 
 ## Emails
 
@@ -38,7 +58,7 @@ Verify empty 'Emails' directory aborts correctly:
     
     Directory 'Emails' has no emails, returning 'null'
     Could not parse any emails in the 'Emails' directory, aborting ...
-    Makefile:7: recipe for target 'run' failed
+    Makefile:13: recipe for target 'run' failed
     make: *** [run] Error 255
     $
 	```

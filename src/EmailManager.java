@@ -57,6 +57,7 @@ public class EmailManager {
         String from    = "";
         String to      = "";
         String date    = "";
+        String text    = "";
 
         int    sIndx, fIndx, tIndx, dIndx;
 
@@ -65,32 +66,36 @@ public class EmailManager {
 
             while((line = br.readLine()) != null) {
 
-                line  = line.toUpperCase();
+                String uc = line.toUpperCase();
 
-                sIndx = line.indexOf(SUBJECT);
-                fIndx = line.indexOf(FROM);
-                tIndx = line.indexOf(TO);
-                dIndx = line.indexOf(DATE);
+                sIndx = uc.indexOf(SUBJECT);
+                fIndx = uc.indexOf(FROM);
+                tIndx = uc.indexOf(TO);
+                dIndx = uc.indexOf(DATE);
                 if (sIndx == 0) {
                     subject = line.substring(SUBJECT.length()).trim();
                 //    System.out.println("SUBJECT = " + subject);
                 }
-                if (fIndx == 0) {
+                else if (fIndx == 0) {
                     from = line.substring(FROM.length()).trim();
                 //    System.out.println("FROM = " + from);
                 }
-                if (tIndx == 0) {
+                else if (tIndx == 0) {
                     to = line.substring(TO.length()).trim();
                 //    System.out.println("TO = " + to);
                 }
-                if (dIndx == 0) {
+                else if (dIndx == 0) {
                     date = line.substring(DATE.length()).trim();
                 //    System.out.println("DATE = " + date);
+                }
+                else {
+                    text = text + line + "\n";
+                //    System.out.println("TEXT = " + text);
                 }
             }   
             br.close();
 
-            return new Email(subject, from, to, date);
+            return new Email(subject, from, to, date, text);
         }
         catch(FileNotFoundException fnfe) {
             System.err.println("Unable to open file '" + fileName + "'");                
