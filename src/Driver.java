@@ -9,7 +9,7 @@ public class Driver {
 
     public static void main(String[] args) {
 
-        boolean parallel = (args.length > 1 && args[1] == "-parallel");
+        boolean parallel = (args.length > 0 && args[0].equals("-parallel"));
 
         String ps = PostScriptManager.getPostScript("PostScript");
         if (ps == null) {
@@ -70,7 +70,6 @@ public class Driver {
         };
 
         if (parallel) {
-            System.out.println("Parallel");
             flagged = emails.parallelStream()
                             .filter(email -> matchKeywords.test(email))
                             .collect(Collectors.toList());
@@ -82,7 +81,8 @@ public class Driver {
 
         System.out.println("Red-Flagged Email:");
         System.out.println("==================");
-        System.out.println(flagged);
+        flagged.stream()
+               .forEach(email -> System.out.println(email + "\n"));
         System.out.println();
 
         // Aggregate flagged authors into a list
@@ -99,24 +99,23 @@ public class Driver {
         System.out.println("Emails (before red-flagged emails removed):");
         System.out.println(emails);
         System.out.println();
+*/
 
-        System.out.println("Removing red-flagged emails ...");
         emails.removeAll(flagged);
         System.out.println();
 
         if (parallel) {
-            System.out.println("Parallel");
             emails.parallelStream()
-                  .forEach(email.appendText(ps));
+                  .forEach(email -> email.appendText(ps));
         } else {
             emails.stream()
-                  .forEach(email.appendText(ps));
+                  .forEach(email -> email.appendText(ps));
         }
-*/
 
         System.out.println("Emails (after red-flagged emails removed):");
         System.out.println("==========================================");
-        System.out.println(emails);
+        emails.stream()
+              .forEach(email -> System.out.println(email));
         System.out.println();
     }
 }
