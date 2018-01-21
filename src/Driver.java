@@ -9,7 +9,7 @@ public class Driver {
 
     public static void main(String[] args) {
 
-        boolean parallel = (args.length > 0 && args[0].equals("-parallel"));
+        final boolean parallel = (args.length > 0 && args[0].equals("-parallel"));
 
         String ps = PostScriptManager.getPostScript("PostScript");
         if (ps == null) {
@@ -69,6 +69,7 @@ public class Driver {
             return false;
         };
 
+        long startTime = System.nanoTime();
         if (parallel) {
             flagged = emails.parallelStream()
                             .filter(email -> matchKeywords.test(email))
@@ -78,6 +79,12 @@ public class Driver {
                             .filter(email -> matchKeywords.test(email))
                             .collect(Collectors.toList());
         }
+        long streamTime = System.nanoTime() - startTime;
+        // 4186615 vs. 6065363 (parallel) so parallel processing seems considerably slower for this small sample (6 emails)
+        // 4065363 vs. 5863130 - another set of runs, numbers slightly different but difference similiar
+        //     [It looks like the parallel process is created by forking, which is a considerable overhead.]
+        System.out.println("Parsing E-Mails - Streaming method parallel: " + parallel + ", time (nanos): " + streamTime);
+        System.out.println();
 
         System.out.println("Red-Flagged Email:");
         System.out.println("==================");
@@ -104,6 +111,7 @@ public class Driver {
         emails.removeAll(flagged);
         System.out.println();
 
+        startTime = System.nanoTime();
         if (parallel) {
             emails.parallelStream()
                   .forEach(email -> email.appendText(ps));
@@ -111,6 +119,12 @@ public class Driver {
             emails.stream()
                   .forEach(email -> email.appendText(ps));
         }
+        streamTime = System.nanoTime() - startTime;
+        // 206702 vs. 419706 (parallel) so parallel processing seems considerably slower for this small sample (6 emails)
+        // 204046 vs. 422650 - another set of runs, numbers slightly different but difference similiar
+        //     [It looks like the parallel process is created by forking, which is a considerable overhead.]
+        System.out.println("Attaching PostScripts - Streaming method parallel: " + parallel + ", time (nanos): " + streamTime);
+        System.out.println();
 
         System.out.println("Emails (after red-flagged emails removed):");
         System.out.println("==========================================");
